@@ -23,34 +23,42 @@ class GuiInstaller(QtWidgets.QScrollArea):
         self.pushButton_browsingFiles = QtWidgets.QPushButton('Browse')
         self.pushButton_browsingFiles.clicked.connect(self._showSourceFiles)
 
+
+        self.frame_packingType = QtWidgets.QFrame()
+        self.frame_packingType.setFrameStyle(1)
+        gridlayout_packingType = QtWidgets.QGridLayout()
+        
         self.label_packingType = QtWidgets.QLabel("Packing Type")
         self.label_packingType.setFixedHeight(60)
         self.label_packingType.setFont(font)
 
-        self.pushButton_oneFile = QtWidgets.QPushButton("One File")
-        self.pushButton_oneFile.setCheckable(True)
-        self.pushButton_oneFile.setChecked(True)
+        self.radio_oneFile = QtWidgets.QRadioButton("One File")
+        self.radio_oneFile.setAutoExclusive(False)
+        self.radio_oneFile.setChecked(True)
+        self.radio_oneFile.setAutoExclusive(True)
+        self.radio_oneDir = QtWidgets.QRadioButton("One Dir")
+        
+        gridlayout_packingType.addWidget(self.label_packingType, 0, 0, 1, 2)
+        gridlayout_packingType.addWidget(self.radio_oneFile, 1, 0, 1, 1)
+        gridlayout_packingType.addWidget(self.radio_oneDir, 1, 1, 1, 1)
+        self.frame_packingType.setLayout(gridlayout_packingType)
 
-        self.pushButton_oneDir = QtWidgets.QPushButton("One Dir")
-        self.pushButton_oneDir.setCheckable(True)
-
-        self.btngrp_packingType = QtWidgets.QButtonGroup()
-        self.btngrp_packingType.addButton(self.pushButton_oneFile)
-        self.btngrp_packingType.addButton(self.pushButton_oneDir)
-
+        self.frame_console = QtWidgets.QFrame() 
+        self.frame_console.setFrameStyle(1)
+        gridlayout_console = QtWidgets.QGridLayout()
+        
         self.label_console = QtWidgets.QLabel("Console")
         self.label_console.setFixedHeight(60)
         self.label_console.setFont(font)
-        self.pushButton_consoleHide = QtWidgets.QPushButton("Hide")
-        self.pushButton_consoleHide.setCheckable(True)
-        self.pushButton_consoleHide.setChecked(True)
-
-        self.pushButton_consoleShow = QtWidgets.QPushButton("Show")
-        self.pushButton_consoleShow.setCheckable(True)
-
-        self.btngrp_consoleDisplay = QtWidgets.QButtonGroup()
-        self.btngrp_consoleDisplay.addButton(self.pushButton_consoleHide)
-        self.btngrp_consoleDisplay.addButton(self.pushButton_consoleShow)
+        self.radio_consoleHide = QtWidgets.QRadioButton("Hide")
+        self.radio_consoleHide.setAutoExclusive(False)
+        self.radio_consoleHide.setChecked(True)
+        self.radio_consoleHide.setAutoExclusive(True)
+        self.radio_consoleShow = QtWidgets.QRadioButton("Show")
+        gridlayout_console.addWidget(self.label_console, 0, 0, 1, 2)
+        gridlayout_console.addWidget(self.radio_consoleHide, 1, 0, 1, 1)
+        gridlayout_console.addWidget(self.radio_consoleShow, 1, 1, 1, 1)
+        self.frame_console.setLayout(gridlayout_console)
 
         self.label_addData = QtWidgets.QLabel("External Data")
         self.label_addData.setFixedHeight(60)
@@ -69,13 +77,15 @@ class GuiInstaller(QtWidgets.QScrollArea):
         GridLayout.addWidget(self.listWidget_source, 1, 0, 1 ,10)
         GridLayout.addWidget(self.pushButton_browsingFiles, 0, 7, 1, 2)
         
-        GridLayout.addWidget(self.label_packingType, 2, 0, 1, 4)
-        GridLayout.addWidget(self.pushButton_oneFile, 3, 0, 1, 1)
-        GridLayout.addWidget(self.pushButton_oneDir, 3, 1, 1, 1)
+        # GridLayout.addWidget(self.label_packingType, 2, 0, 1, 4)
+        # GridLayout.addWidget(self.radio_oneFile, 3, 0, 1, 1)
+        # GridLayout.addWidget(self.radio_oneDir, 3, 1, 1, 1)
+        GridLayout.addWidget(self.frame_packingType, 2, 0, 2, 5)
 
-        GridLayout.addWidget(self.label_console, 2, 5, 1, 4)
-        GridLayout.addWidget(self.pushButton_consoleHide, 3, 5, 1, 1)
-        GridLayout.addWidget(self.pushButton_consoleShow, 3, 6, 1, 1)
+        # GridLayout.addWidget(self.label_console, 2, 5, 1, 4)
+        # GridLayout.addWidget(self.radio_consoleHide, 3, 5, 1, 1)
+        # GridLayout.addWidget(self.radio_consoleShow, 3, 6, 1, 1)
+        GridLayout.addWidget(self.frame_console, 2, 5, 2, 5)
 
         GridLayout.addWidget(self.label_addData, 6, 0, 1, 10)
         GridLayout.addWidget(self.label_DataNums, 6, 5, 1, 2)
