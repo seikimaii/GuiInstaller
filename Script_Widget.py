@@ -1,7 +1,7 @@
 from PySide2 import QtWidgets, QtCore, QtGui
 import os
 
-class Script_Widget(QtWidgets.QScrollArea):
+class Script_Widget(QtWidgets.QWidget):
     def __init__(self):
         super(Script_Widget, self).__init__()
 
