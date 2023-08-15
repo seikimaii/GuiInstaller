@@ -6,8 +6,14 @@ class MainWindow(QtWidgets.QWidget):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setWindowTitle("Pyking")
-        
+        self.setStyleSheet("background-color:rgb(230, 230, 230)")
+                           
         self.resize(800, 800)
+
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        font.setFamily("Consolas")
+
         verticalLayout = QtWidgets.QVBoxLayout()
 
         self.script_page = Script_Widget() 
@@ -19,9 +25,10 @@ class MainWindow(QtWidgets.QWidget):
                                                             border: none;
                                                             
                                                             }
-                                        QTabBar::tab:selected {border-color:black; border-bottom:none;}
-                                        QTabBar::tab {width:280px; height:60px; border-style:solid; border-width:2px; border-top-right-radius: 20px;border-top-left-radius: 20px}
+                                        QTabBar::tab:selected {border-color:black; border-bottom:none;background-color:rgb(230,230,230)}
+                                        QTabBar::tab {width:280px; height:60px; background-color:rgb(200,200,200); border-style:solid; border-width:1px; border-top-right-radius: 20px;border-top-left-radius: 20px}
                                     ''')
+        self.tabWidget.setFont(font)
         self.tabWidget.addTab(self.script_page, "Script")
         self.tabWidget.addTab(self.sys_page, "Sys Set")
         verticalLayout.addWidget(self.tabWidget)

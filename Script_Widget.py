@@ -1,10 +1,28 @@
 from PySide2 import QtWidgets, QtCore, QtGui
 import os
 
+button_style = '''QPushButton {color: rgb(0, 0, 0);
+                            background: rgba(126, 198, 224, 1);
+                            border: 2px;
+                            border-radius: 8px;
+                            
+                            }
+            QPushButton:hover {
+                                background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
+                                stop: 0 rgba(46, 138, 240, 0.5), stop: 1 rgba(46, 138, 240, 1));
+                                }
+            QPushButton:pressed {
+                                background: qlineargradient(x1: 0.1, y1: 0.3, x2: 0.5, y2: 0.5,
+                                stop: 0 rgba(30, 122, 220, 0.5), stop: 1 rgba(30, 122, 220, 1));
+                                border: 2px;
+                                border-radius: 8px;
+                                
+                                }
+            '''
+
 class Script_Widget(QtWidgets.QWidget):
     def __init__(self):
         super(Script_Widget, self).__init__()
-
         GridLayout = QtWidgets.QGridLayout()
 
         font = QtGui.QFont()
@@ -16,9 +34,12 @@ class Script_Widget(QtWidgets.QWidget):
         self.label_title.setFont(font)
 
         self.listWidget_source = QtWidgets.QListWidget()
+        self.listWidget_source.setStyleSheet("background-color:white")
         self.label_sourceNums = QtWidgets.QLabel("0 Files")
         self.label_sourceNums.setFont(font)
         self.pushButton_browsingFiles = QtWidgets.QPushButton('Browse')
+        self.pushButton_browsingFiles.setFont(font)
+        self.pushButton_browsingFiles.setStyleSheet(button_style)
         self.pushButton_browsingFiles.clicked.connect(self._showSourceFiles)
 
 
@@ -65,9 +86,12 @@ class Script_Widget(QtWidgets.QWidget):
         self.label_addData.setFont(font)
 
         self.listWidget_Data = QtWidgets.QListWidget()
+        self.listWidget_Data.setStyleSheet("background-color:white")
         self.label_DataNums = QtWidgets.QLabel("0 Files")
         self.label_DataNums.setFont(font)
         self.pushButton_addDataItem = QtWidgets.QPushButton("Add")
+        self.pushButton_addDataItem.setFont(font)
+        self.pushButton_addDataItem.setStyleSheet(button_style)
         self.pushButton_addDataItem.clicked.connect(self._showDataFiles)
 
         
