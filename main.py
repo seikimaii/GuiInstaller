@@ -1,6 +1,12 @@
 from PySide2 import QtWidgets, QtGui
+import sys, io
 from Script_Widget import Script_Widget
 from Sys_Widget import Sys_Widget
+from PyInstaller import __main__ as pymain
+from PyInstaller.log import logger
+import logging
+
+logger = logging.getLogger(__name__)
 
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -34,7 +40,28 @@ class MainWindow(QtWidgets.QWidget):
         verticalLayout.addWidget(self.tabWidget)
         
         self.setLayout(verticalLayout)
+
+        self.sys_page.pushButton_Execute.clicked.connect(self._Compile)
+        self.log_stream = io.StringIO()
+        self.io_temp = sys.stdout
+        sys.stdout = self.log_stream
+
         
+        pymain.logger = logger
+        pymain.logger.addHandler(self.sys_page.textHandler)
+        pymain.logger.setLevel(logging.DEBUG)
+        pymain.logger.info("haha")
+        # self.stdout = sys.stdout
+        # self.stderr = sys.stderr.buffer
+
+        # sys
+        
+        
+    def _Compile(self):
+        try:
+            pymain.run(["test.py"])
+        except Exception as e:
+            print(str(e))
         
 
 
