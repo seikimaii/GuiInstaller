@@ -1,5 +1,6 @@
 from PySide2 import QtWidgets, QtCore, QtGui
 from logHandler import TextBrowserHandler
+from ConsoleInterface import ConsoleInterface
 import logging
 
 button_style = '''QPushButton {color: rgb(0, 0, 0);
@@ -59,14 +60,18 @@ class Sys_Widget(QtWidgets.QWidget):
         self.pushButton_Execute.setFont(font)
 
         font.setPointSize(12)
+        # self.textArea = ConsoleInterface()
         self.textArea = QtWidgets.QTextBrowser()
-        self.textArea.setStyleSheet("background-color:white")
+        # self.textArea.verticalScrollBar().scroll()
+        # self.textArea.input_line
+        self.textArea.setStyleSheet("background-color:white;color:black;")
         self.textArea.setFont(font)
         self.textArea.setFrameStyle(1)
         self.textArea.append("Waiting for Start....")
+        
 
-        self.textHandler = TextBrowserHandler(self.textArea)
-        logging.basicConfig(handlers=[self.textHandler])
+        # self.textHandler = TextBrowserHandler(self.textArea)
+        # logging.basicConfig(handlers=[self.textHandler])
 
         # GridLayout.addWidget(self.label_output_dir, 0, 0, 1, 10)
         GridLayout.addWidget(self.frame_outputDir, 0, 0, 1, 10)
@@ -90,4 +95,5 @@ if __name__ == "__main__":
     win = Sys_Widget()
     win.show()
 
+    
     sys.exit(app.exec_())
